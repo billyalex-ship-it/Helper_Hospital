@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard | The Helper Hospital</title>
+	<link rel="stylesheet" href="/nav.css">
+</head>
+<body class="dashboard-body">
+	<div class="dashboard-layout">
+		<%- include('_sidenav', { role: 'admin', active: 'dashboard' }) %>
+		<main class="dashboard-main">
+			<header class="dashboard-header">
+				<div>
+					<p class="eyebrow">Monday, 04 September 2026</p>
+					<h1>Hello <%= user ? user.name : 'Administrator' %></h1>
+					<p class="dashboard-subtitle">Here is what is happening across The Helper Hospital today.</p>
+				</div>
+				<a class="header-action" href="/patients">View patient records <span aria-hidden="true">&rarr;</span></a>
+			</header>
+
+			<section class="metric-grid" aria-label="Hospital overview">
+				<article class="metric-card metric-card-teal">
+					<span class="metric-label">Patients</span>
+					<strong><%= patientResult.patientCount %></strong>
+					<small>Registered patient records</small>
+				</article>
+				<article class="metric-card metric-card-blue">
+					<span class="metric-label">Doctors</span>
+					<strong><%= doctorresult.doctorCount %></strong>
+					<small>Members of the medical team</small>
+				</article>
+				<article class="metric-card metric-card-gold">
+					<span class="metric-label">Nurses</span>
+					<strong><%= nurseResult.nurseCount %></strong>
+					<small>Active nursing staff</small>
+				</article>
+				<article class="metric-card metric-card-coral">
+					<span class="metric-label">Visitors</span>
+					<strong><%= visitorResult.visitorCount %></strong>
+					<small>Active visitors</small>
+				</article>
+			</section>
+
+			<section class="dashboard-grid">
+				<article class="dashboard-card quick-card">
+					<p class="eyebrow">Quick actions</p><h2>Keep the day moving</h2>
+					<a href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
+					<a href="/doctors">Review medical team <span aria-hidden="true">&rarr;</span></a>
+					<a href="/visitors">Manage visitors <span aria-hidden="true">&rarr;</span></a>
+					<a href="/employees">Manage employees <span aria-hidden="true">&rarr;</span></a>
+				</article>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

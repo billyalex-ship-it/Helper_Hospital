@@ -1,0 +1,22 @@
+<header class="M_header">
+    <div class="header-inner">
+        <div class="brand">
+            <h1>The Helper Hospital</h1>
+            <p>Level 4 hospital care with compassion, technology, and trust.</p>
+        </div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/nurses">Nurses</a>
+            <a href="/patients">Patients</a>
+            <a href="/visitors">Visitors</a>
+            <a href="/contact">Contact</a>
+            <% if (user) { %>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+            <% } %>
+        </div>
+        <span class="status-pill">24/7 Emergency</span>
+    </div>
+</header>

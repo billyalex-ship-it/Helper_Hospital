@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Doctor Dashboard | The Helper Hospital</title>
+	<link rel="stylesheet" href="/nav.css">
+</head>
+<body class="dashboard-body">
+	<div class="dashboard-layout">
+		<%- include('_sidenav', { role: 'doctor', active: 'dashboard' }) %>
+		<main class="dashboard-main">
+			<header class="dashboard-header">
+				<div>
+					
+					<h1>Hello, <%= user.name %></h1>
+					<p class="dashboard-subtitle">Your clinical schedule and patient care summary for today.</p>
+				</div>
+				<a class="header-action" href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
+			</header>
+
+			<section class="metric-grid" aria-label="Doctor overview">
+				<article class="metric-card metric-card-teal"><span class="metric-label">Today's appointments</span><strong>08</strong><small>3 consultations remaining</small></article>
+				<article class="metric-card metric-card-blue"><span class="metric-label">My patients</span><strong>26</strong><small>4 require follow-up</small></article>
+				<article class="metric-card metric-card-gold"><span class="metric-label">Ward rounds</span><strong>03</strong><small>Next round at 11:30</small></article>
+				<article class="metric-card metric-card-coral"><span class="metric-label">Unread notes</span><strong>05</strong><small>From your care team</small></article>
+			</section>
+
+			<section class="dashboard-grid">
+				<article class="dashboard-card activity-card">
+					<div class="card-heading"><div><p class="eyebrow">Your schedule</p><h2>Today's appointments</h2></div><span class="date-chip">04 Sep</span></div>
+					<div class="appointment-row"><span class="time">09:00</span><div><strong>Follow-up consultation</strong><small>Room 204 &middot; Outpatient clinic</small></div><span class="appointment-status">Next</span></div>
+					<div class="appointment-row"><span class="time">10:30</span><div><strong>New patient assessment</strong><small>Room 204 &middot; Outpatient clinic</small></div><span class="appointment-status muted">Upcoming</span></div>
+					<div class="appointment-row"><span class="time">11:30</span><div><strong>Ward round</strong><small>East wing &middot; Inpatient care</small></div><span class="appointment-status muted">Upcoming</span></div>
+				</article>
+				<article class="dashboard-card quick-card">
+					<p class="eyebrow">Clinical tools</p><h2>Care at a glance</h2>
+					<a href="/patients">Review patient list <span aria-hidden="true">&rarr;</span></a>
+					<a href="/doctors">View medical team <span aria-hidden="true">&rarr;</span></a>
+					<a href="/visitors">Check visitor requests <span aria-hidden="true">&rarr;</span></a>
+				</article>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

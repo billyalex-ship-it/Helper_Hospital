@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drugs | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell">
+        <section class="section-header reveal">
+            <p class="eyebrow">Hospital pharmacy</p>
+            <h1>Drug directory</h1>
+            <p>Review the medicines recorded in the hospital database.</p>
+        </section>
+
+        <section class="content-panel reveal">
+            <% if (drugs.length) { %>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Drug</th>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Stock</th>
+                                <th>Unit price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% drugs.forEach(drug => { %>
+                                <tr>
+                                    <td><strong><%= drug.drug_name %></strong></td>
+                                    <td><%= drug.drug_id %></td>
+                                    <td><%= drug.drug_type %></td>
+                                    <td><%= drug.stock_quantity %></td>
+                                    <td><%= drug.unit_price %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <p>No drugs are listed yet.</p>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

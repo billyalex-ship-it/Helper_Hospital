@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell patient-page-shell">
+        <section class="section-header reveal">
+            <p class="eyebrow">Patient services</p>
+            <h1>Support from admission to recovery</h1>
+            <p>We provide a welcoming environment where every patient receives respectful, coordinated, and safe care throughout treatment.</p>
+        </section>
+
+        <section class="content-panel reveal">
+            <p class="eyebrow">Quality care and facilities</p>
+            <h2>Everything in place for better treatment outcomes.</h2>
+            <p>Our hospital combines skilled healthcare teams, reliable facilities, and coordinated services to give patients the best possible treatment experience from their first consultation through recovery.</p>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="icon">01</div>
+                    <h3>Coordinated clinical care</h3>
+                    <p>Doctors, nurses, and support teams work together to create clear treatment plans and keep every stage of care connected.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="icon">02</div>
+                    <h3>Modern diagnostic facilities</h3>
+                    <p>Diagnostic and imaging services help our clinicians make informed decisions and begin the right treatment as quickly as possible.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="icon">03</div>
+                    <h3>Safe recovery support</h3>
+                    <p>Comfortable treatment spaces, attentive monitoring, and follow-up guidance help patients recover safely and confidently.</p>
+                </article>
+            </div>
+        </section>
+
+        <div class="side-by-side reveal">
+            <section class="form-panel patient-form-panel">
+            <% if (user && user.role === 'admin') { %>
+                <p class="eyebrow">Add a new patient</p>
+                <h2>Patient form</h2>
+                <p class="form-intro">Enter the patient's details and assign the responsible doctor.</p>
+                <form class="patient-form-grid" action="/add-patients" method="post">
+                    <label>
+                        Patient ID
+                        <input type="text" id="patient_id" name="patient_id" maxlength="30" required>
+                    </label>
+                    <label>
+                        Patient Name
+                        <input type="text" id="patient_name" name="patient_name" maxlength="50" required>
+                    </label>
+                    <label>
+                        Phone Number
+                        <input type="tel" id="phone_no" name="phone_no" maxlength="20" required>
+                    </label>
+                    <label>
+                        Doctor
+                        <select id="doctor_id" name="doctor_id" required>
+                            <option value="">Choose a doctor</option>
+                            <% doctors.forEach(doctor => { %>
+                                <option value="<%= doctor.doctor_id %>"><%= doctor.doc_name %> (ID: <%= doctor.doctor_id %>)</option>
+                            <% }); %>
+                        </select>
+                    </label>
+                    <label>
+                        Date of Birth
+                        <input type="date" id="date_of_birth" name="date_of_birth">
+                    </label>
+                    <label>
+                        Gender
+                        <select id="gender" name="gender">
+                            <option value="">Prefer not to say</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
+                    <label>
+                        Address
+                        <input type="text" id="address" name="address" maxlength="255">
+                    </label>
+                    <button type="submit">Add Patient</button>
+                </form>
+            <% } %>
+            </section>
+            <% if (user && user.role === 'admin') { %>
+            <section class="patient-list-panel">
+                <h2>Patient Directory</h2>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>ID</th>
+                                <th>Phone</th>
+                                <th>Doctor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% patients.forEach(patient => { %>
+                                <tr>
+                                    <td><strong><%= patient.patient_name %></strong></td>
+                                    <td><%= patient.patient_id %></td>
+                                    <td><%= patient.phone_no %></td>
+                                    <td><%= patient.doc_name %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <% } %>
+        </div>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

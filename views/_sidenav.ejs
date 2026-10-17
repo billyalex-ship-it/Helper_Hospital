@@ -1,0 +1,42 @@
+<aside class="side-nav">
+	<div class="side-nav-brand">
+		<span class="brand-mark" aria-hidden="true">TH</span>
+		<div>
+			<strong>The Helper</strong>
+			<small>Hospital workspace</small>
+		</div>
+	</div>
+
+	<div class="side-nav-user">
+		<span class="user-avatar">
+			<%= role === 'doctor' ? 'DR' : role === 'reception' ? 'FR' : 'AD' %></span>
+		<div>
+			<strong><%= role === 'doctor' ? 'Doctor' : role === 'reception' ? 'Receptionist' : 'Administrator' %></strong>
+			<small><%= role === 'doctor' ? 'Clinical team' : role === 'reception' ? 'Front desk team' : 'Operations team' %></small>
+		</div>
+	</div>
+
+	<nav aria-label="Dashboard navigation">
+		<p class="nav-label">Workspace</p>
+		<a class="nav-link <%= active === 'dashboard' ? 'is-active' : '' %>" href="/dashboard">
+			<span class="nav-icon" aria-hidden="true">+</span> Dashboard
+		</a>
+		<a class="nav-link <%= active === 'patients' ? 'is-active' : '' %>" href="/patients">
+			<span class="nav-icon" aria-hidden="true">P</span> Patients
+		</a>
+		<a class="nav-link <%= active === 'doctors' ? 'is-active' : '' %>" href="/doctors">
+			<span class="nav-icon" aria-hidden="true">D</span> Doctors
+		</a>
+		<a class="nav-link <%= active === 'nurses' ? 'is-active' : '' %>" href="/nurses">
+			<span class="nav-icon" aria-hidden="true">N</span> Nurses
+		</a>
+		<a class="nav-link <%= active === 'visitors' ? 'is-active' : '' %>" href="/visitors">
+			<span class="nav-icon" aria-hidden="true">V</span> Visitors
+		</a>
+	</nav>
+
+	<div class="side-nav-footer">
+		<a class="nav-link" href="/"><span class="nav-icon" aria-hidden="true">H</span> Hospital home</a>
+		<a class="nav-link nav-link-quiet" href="/logout"><span class="nav-icon" aria-hidden="true">&rarr;</span> Sign out</a>
+	</div>
+</aside>

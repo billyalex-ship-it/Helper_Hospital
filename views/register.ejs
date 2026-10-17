@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register | Helper Hospital </title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell">
+        <section class="section-header reveal">
+            <p class="eyebrow">Staff access</p>
+            <h1>Create an account</h1>
+            <p>Register a new team member for The Helper Hospital workspace.</p>
+        </section>
+
+        <section class="form-panel reveal">
+            <form action="/register" method="post">
+                <label for="name">Name
+                    <input type="text" id="name" name="name" maxlength="100" required>
+                </label>
+                
+                <label for="email">Email
+                    <input type="email" id="email" name="email" maxlength="100" required>
+                </label>
+                <label for="password">Create your password
+                    <input type="password" id="password" name="password" required>
+                </label>
+                <label for="role">Role
+                    <select id="role" name="role" required>
+                        <option value="">Choose a role</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="nurse">Nurse</option>
+                        <option value="patient">Patient</option>
+                        <option value="admin">Administrator</option>
+                        <option value="visitor">Visitor</option>
+                        <option value="reception">Reception</option>
+                    </select>
+                </label>
+
+                <button type="submit">Add User</button>
+            </form>
+        </section>
+    </main>
+
+    <%- include ("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

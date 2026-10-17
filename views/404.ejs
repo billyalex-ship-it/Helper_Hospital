@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="page-shell">
+        <section class="hero reveal">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">404 error</p>
+                    <h2>We couldn't find the page you were looking for.</h2>
+                    <p>The page may have moved, been removed, or never existed. Please use the navigation below to continue exploring the hospital services.</p>
+
+                    <div class="cta-row">
+                        <a class="primary-btn" href="/">Back to Home</a>
+                        <a class="secondary-btn" href="/patients">View Patients</a>
+                    </div>
+                </div>
+
+                <aside class="hero-panel reveal">
+                    <div class="metric">
+                        <div>
+                            <strong>404</strong>
+                            <span>Page unavailable</span>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div>
+                            <strong>24/7</strong>
+                            <span>Support available</span>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div>
+                            <strong>Home</strong>
+                            <span>Return to main navigation</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

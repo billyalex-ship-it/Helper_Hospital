@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login | The Helper Hospital</title>
+    <link rel="stylesheet" href="/nav.css">
+</head>
+<body>
+    <main class="login-page">
+        <section class="login-panel" aria-labelledby="login-title">
+            <div class="login-brand">
+                <span class="brand-mark" aria-hidden="true">TH</span>
+                <div>
+                    <p class="eyebrow">The Helper Hospital</p>
+                    <h1 id="login-title">Welcome back</h1>
+                </div>
+            </div>
+            <p class="login-intro">Sign in to access your hospital workspace.</p>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <p class="form-alert" role="alert"><%= error %></p>
+            <% } %>
+
+            <form class="login-form" action="/login" method="post">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email"  required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+               <button type="submit">Sign in</button>
+            </form>
+            <div class="login_form_links">
+             <div class="sign-up_link"><a  style=" color: blue; text-decoration: underline;"href="/register">Don't have an account? Register here</a></div>
+             <div class="return_home-link">
+            <a class="back-link" href="/">Return to homepage</a>
+             </div>
+            </div>
+        </section>
+        <aside class="login-aside" aria-label="Hospital service message">
+            <p class="eyebrow">Care in every detail</p>
+            <h2>One calm place for every clinical decision.</h2>
+            <p>Keep teams connected, records organized, and patients at the center of every shift.</p>
+            <div class="aside-status"><span></span> Systems available 24/7</div>
+        </aside>
+    </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell">
+        <section class="section-header reveal">
+            <p class="eyebrow">Our specialists</p>
+            <h1>Meet our doctors</h1>
+            <p>Our clinical team includes experienced physicians committed to safe treatment, clear communication, and better outcomes.</p>
+        </section>
+
+        <section class="content-panel reveal">
+            <p class="eyebrow">Expert care and guidance</p>
+            <h2>Doctors who put patients first.</h2>
+            <p>Our doctors are highly trained in their specialties and work closely with patients to create clear treatment plans, answer questions, and provide guidance throughout the care journey.</p>
+        </section>
+        <section class="card-grid reveal">
+            <% doctors.forEach(doctor => { %>
+                <article class="info-card">
+                    <div class="badge">Doctor</div>
+                    <h3><%= doctor.doc_name %></h3>
+                    <p><strong>ID:</strong> <%= doctor.doctor_id %></p>
+                    <p><strong>Speciality:</strong> <%= doctor.speciality %></p>
+                    <p><strong>Room:</strong> <%= doctor.room_id %></p>
+
+                </article>
+            <% }); %>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact Us | The Helper Hospital</title>
+	<link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+	<%- include("_header.ejs") %>
+
+	<main class="main-shell">
+		<section class="section-header reveal">
+			<p class="eyebrow">We are here to help</p>
+			<h1>Contact The Helper Hospital</h1>
+			<p>Reach our team for appointments, patient guidance, visiting information, or help finding the right hospital service.</p>
+		</section>
+
+		<section class="side-by-side reveal">
+			<div class="content-panel">
+				<p class="eyebrow">Get in touch</p>
+				<h2>Talk to our care team</h2>
+				<p>Our reception team can direct you to the right department and answer questions about your visit.</p>
+
+				<ul class="meta-list">
+					<li><span>Phone</span><strong><a href="tel:0718565456">0718565456</a></strong></li>
+					<li><span>Email</span><strong><a href="mailto:care@thehelperhospital.com">care@thehelperhospital.com</a></strong></li>
+					<li><span>Emergency care</span><strong>Available 24/7</strong></li>
+					<li><span>Reception hours</span><strong>Monday - Sunday, 8am - 6pm</strong></li>
+				</ul>
+			</div>
+
+			<div class="card-grid">
+				<article class="info-card">
+					<div class="badge">Visit us</div>
+					<h3>Hospital reception</h3>
+					<p>The Helper Hospital<br>Level 4 Healthcare Centre<br>Main reception, hospital campus</p>
+				</article>
+				<article class="info-card">
+					<div class="badge">Before you call</div>
+					<h3>Have these details ready</h3>
+					<p>Patient name, appointment details, and a brief description of how we can assist you.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="content-panel reveal">
+			<p class="eyebrow">Need immediate assistance?</p>
+			<h2>For emergencies, call us now</h2>
+			<p>Call <a class="primary-btn" href="tel:0718565456">0718565456</a> for urgent hospital assistance. If you are experiencing a life-threatening emergency, contact your local emergency services.</p>
+		</section>
+	</main>
+
+	<%- include("_footer.ejs") %>
+	<script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reception Dashboard | The Helper Hospital</title>
+    <link rel="stylesheet" href="/nav.css">
+</head>
+        <body class="dashboard-body">
+            <div class="dashboard-layout">
+                <%- include('_sidenav', { role: 'reception', active: 'dashboard' }) %>
+                <main class="dashboard-main">
+                    <header class="dashboard-header">
+                        <div>
+                            
+                            <h1>Hello <%= user ? user.name : 'Receptionist' %></h1>
+                            <p class="dashboard-subtitle">Your front desk overview for The Helper Hospital today.</p>
+                        </div>
+                        <a class="header-action" href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
+                    </header>
+
+                    <section class="metric-grid" aria-label="Reception overview">
+                        <article class="metric-card metric-card-teal"><span class="metric-label">Today's arrivals</span><strong>12</strong><small>Patients expected today</small></article>
+                        <article class="metric-card metric-card-blue"><span class="metric-label">Pending check-ins</span><strong>04</strong><small>Awaiting reception support</small></article>
+                        <article class="metric-card metric-card-gold"><span class="metric-label">Visitor requests</span><strong>07</strong><small>Requests to review</small></article>
+                        <article class="metric-card metric-card-coral"><span class="metric-label">Open records</span><strong>03</strong><small>Updates needed today</small></article>
+                    </section>
+
+                    <section class="dashboard-grid">
+                        <article class="dashboard-card activity-card">
+                            <div class="card-heading"><div><p class="eyebrow">Front desk queue</p><h2>Today's check-ins</h2></div><span class="date-chip">04 Sep</span></div>
+                            <div class="appointment-row"><span class="time">09:00</span><div><strong>Outpatient appointment</strong><small>Room 204 &middot; New patient registration</small></div><span class="appointment-status">Next</span></div>
+                            <div class="appointment-row"><span class="time">10:30</span><div><strong>Follow-up visit</strong><small>Room 118 &middot; Returning patient</small></div><span class="appointment-status muted">Upcoming</span></div>
+                            <div class="appointment-row"><span class="time">11:30</span><div><strong>Visitor check-in</strong><small>East wing &middot; Visitor services</small></div><span class="appointment-status muted">Upcoming</span></div>
+                        </article>
+                        <article class="dashboard-card quick-card">
+                            <p class="eyebrow">Reception tools</p><h2>Keep the desk moving</h2>
+                            <a href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
+                            <a href="/visitors">Manage visitors <span aria-hidden="true">&rarr;</span></a>
+                            <a href="/doctors">View medical team <span aria-hidden="true">&rarr;</span></a>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </body>
+</body>
+</html>

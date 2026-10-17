@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitors | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell">
+        <section class="section-header reveal">
+            <p class="eyebrow">Visitor services</p>
+            <h1>Welcome to our care environment</h1>
+            <p>We appreciate the role families and visitors play in supporting patient recovery and peace of mind.</p>
+        </section>
+
+        <section class="content-panel reveal">
+            <p class="eyebrow">How we support visitors</p>
+            <h2>Visitor services designed for comfort and clarity</h2>
+            <p>We understand that visiting a loved one can be a stressful time, so our team is committed to making the experience simple, warm, and well-organized. From check-in support to guidance on hospital procedures, we aim to help families feel welcomed and informed.</p>
+            <p>Visitors can expect respectful assistance, clear communication about patient access, and support when coordinating visits during treatment or recovery. We also provide practical information to help guests navigate the hospital safely and efficiently while respecting patient privacy and clinical routines.</p>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="icon">01</div>
+                    <h3>Easy check-in</h3>
+                    <p>Our registration process helps visitors quickly identify themselves and confirm the correct patient visit details.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">02</div>
+                    <h3>Family support</h3>
+                    <p>We create a welcoming environment for family members and caregivers who are closely involved in patient care.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">03</div>
+                    <h3>Safe access</h3>
+                    <p>Visitor policies are designed to protect patient privacy, maintain calm hospital operations, and ensure a secure environment.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="form-panel reveal">
+            <h2>Visitor registration</h2>
+            <p>Please complete the form below before visiting a patient.</p>
+            <form action="/add-visitors" method="post">
+                <div class="form-row">
+                    
+                    <label>
+                        Full Name
+                        <input type="text" id="visitor_name" name="visitor_name" maxlength="50" required>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        Phone Number
+                        <input type="tel" id="phone_no" name="phone_no" maxlength="20" required>
+                    </label>
+                    <label>
+                        Patient
+                        <select id="patient_id" name="patient_id" required>
+                            <option value="">Choose a patient</option>
+                            <% patients.forEach(patient => { %>
+                                <option value="<%= patient.patient_id %>"><%= patient.patient_name %> (ID: <%= patient.patient_id %>)</option>
+                            <% }); %>
+                        </select>
+                    </label>
+                </div>
+                <button type="submit">Submit Visit</button>
+            </form>
+        </section>
+
+        <section class="content-panel reveal">
+            <h2>Registered visitors</h2>
+            <% if (visitors.length) { %>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Visitor</th>
+                                <th>Phone</th>
+                                <th>Patient</th>
+                                <th>Patient ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% visitors.forEach(visitor => { %>
+                                <tr>
+                                    <td><strong><%= visitor.visitor_name %></strong></td>
+                                    <td><%= visitor.phone_no %></td>
+                                    <td><%= visitor.patient_name %></td>
+                                    <td><%= visitor.patient_id %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <p>No visitors are registered yet.</p>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>

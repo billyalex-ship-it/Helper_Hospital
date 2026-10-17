@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+    <main class="main-shell employee-page">
+        <section class="section-header reveal">
+            <p class="eyebrow">People and operations</p>
+            <h1>Employee directory</h1>
+            <p>Keep the hospital team directory current and make every department easy to reach.</p>
+        </section>
+<!-- Create a section for the users-->
+ <section id="users-section">
+<div class="users-dir">
+    <%  users.forEach(user => { %>
+        <div class="user-card">
+            <h3><%= user.name %></h3>
+            <p><strong>ID:</strong> <%= user.user_id %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Role:</strong> <%= user.role %></p>
+        </div>
+    <% }); %>
+</div>
+<div class="add-user">
+    <form action="/add_user" method="post">
+        <label for="user_name">Name</label>
+        <input type="text" id="user_name" name="name" maxlength="100" required>
+        <label for="user_email">Email</label>
+        <input type="email" id="user_email" name="email" maxlength="100" required>
+        <label for="user_password">Password</label>
+        <input type="password" id="user_password" name="password" required>
+        <label for="user_role">Role</label>
+        <select id="user_role" name="role" required>
+            <option value="">Choose a role</option>
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+            <option value="patient">Patient</option>
+            <option value="admin">Administrator</option>
+            <option value="visitor">Visitor</option>
+            <option value="reception">Reception</option>
+        </select>
+        <button type="submit">Add User</button>
+    </form>
+</div>
+ </section>
+        <section class="employee-section reveal">
+            <div class="employee-section-heading">
+                <div>
+                    <p class="eyebrow">Clinical team</p>
+                    <h2>Doctors</h2>
+                </div>
+                <span class="section-count"><%= doctors.length %> listed</span>
+            </div>
+            <div class="employee-layout">
+                <div class="employee-directory">
+                    <% if (doctors.length) { %>
+                        <div class="employee-grid">
+                            <% doctors.forEach(doctor => { %>
+                                <article class="info-card">
+                                    <div class="badge">Doctor</div>
+                                    <h3><%= doctor.doc_name %></h3>
+                                    <p><strong>ID:</strong> <%= doctor.doctor_id %></p>
+                                    <p><strong>Speciality:</strong> <%= doctor.speciality %></p>
+                                    <p><strong>Room:</strong> <%= doctor.room_id %></p>
+                                </article>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <p class="empty-state">No doctors have been added yet.</p>
+                    <% } %>
+                </div>
+                <section class="form-panel employee-form">
+                    <p class="eyebrow">Add to directory</p>
+                    <h2>New doctor</h2>
+                    <form action="/add_doc" method="post">
+                        <label for="doctor_id">ID</label>
+                        <input type="text" id="doctor_id" name="doctor_id" maxlength="20" required>
+                        <label for="doc_name">Name</label>
+                        <input type="text" id="doc_name" name="doc_name" maxlength="50" required>
+                        <label for="doctor_speciality">Speciality</label>
+                        <input type="text" id="doctor_speciality" name="speciality" maxlength="50" required>
+                        <label for="doctor_phone_number">Phone</label>
+                        <input type="tel" id="doctor_phone_number" name="phone_number" maxlength="20" required>
+                        <label for="doctor_room_id">Room ID</label>
+                        <select id="doctor_room_id" name="room_id" required>
+                            <option value="">Choose a room</option>
+                            <% rooms.forEach(room => { %>
+                                <option value="<%= room.room_id %>"><%= room.room_id %> - <%= room.room_name %></option>
+                            <% }); %>
+                        </select>
+                        <label for="doctor_user_id">User ID</label>
+                        <select id="doctor_user_id" name="user_id" required>
+                            <option value="">Choose a doctor account</option>
+                            <% doctorUsers.forEach(account => { %>
+                                <option value="<%= account.user_id %>"><%= account.name %> (ID: <%= account.user_id %>)</option>
+                            <% }); %>
+                        </select>
+                        <button type="submit">Add Doctor</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+
+        <section class="employee-section reveal">
+            <div class="employee-section-heading">
+                <div>
+                    <p class="eyebrow">Care team</p>
+                    <h2>Nurses</h2>
+                </div>
+                <span class="section-count"><%= nurses.length %> listed</span>
+            </div>
+            <div class="employee-layout">
+                <div class="employee-directory">
+                    <% if (nurses.length) { %>
+                        <div class="employee-grid">
+                            <% nurses.forEach(nurse => { %>
+                                <article class="info-card">
+                                    <div class="badge">Nurse</div>
+                                    <h3><%= nurse.nurse_name %></h3>
+                                    <p><strong>ID:</strong> <%= nurse.nurse_id %></p>
+                                    <p><strong>Speciality:</strong> <%= nurse.speciality %></p>
+                                    <p><strong>Phone:</strong> <%= nurse.phone_number %></p>
+                                    <p><strong>Room ID:</strong> <%= nurse.room_id %></p>
+                                    <p><strong>User ID:</strong> <%= nurse.user_id %></p>
+                                </article>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <p class="empty-state">No nurses have been added yet.</p>
+                    <% } %>
+                </div>
+                <section class="form-panel employee-form">
+                    <p class="eyebrow">Add to directory</p>
+                    <h2>New nurse</h2>
+                    <form action="/add_nurse" method="post">
+                        <label for="nurse_id">ID</label>
+                        <input type="text" id="nurse_id" name="nurse_id" maxlength="20" required>
+                        <label for="nurse_name">Name</label>
+                        <input type="text" id="nurse_name" name="nurse_name" maxlength="50" required>
+                        <label for="nurse_speciality">Speciality</label>
+                        <input type="text" id="nurse_speciality" name="speciality" maxlength="50" required>
+                        <label for="phone_number">Phone</label>
+                        <input type="tel" id="phone_number" name="phone_number" maxlength="20" required>
+                        <label for="nurse_room_id">Room ID</label>
+                        <select id="nurse_room_id" name="room_id" required>
+                            <option value="">Choose a room</option>
+                            <% rooms.forEach(room => { %>
+                                <option value="<%= room.room_id %>"><%= room.room_id %> - <%= room.room_name %></option>
+                            <% }); %>
+                        </select>
+                        <label for="nurse_user_id">User ID</label>
+                        <select id="nurse_user_id" name="user_id" required>
+                            <option value="">Choose a nurse account</option>
+                            <% nurseUsers.forEach(account => { %>
+                                <option value="<%= account.user_id %>"><%= account.name %> (ID: <%= account.user_id %>)</option>
+                            <% }); %>
+                        </select>
+                        <button type="submit">Add Nurse</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+
+        <section class="employee-section reveal">
+            <div class="employee-section-heading">
+                <div>
+                    <p class="eyebrow">Front desk team</p>
+                    <h2>Receptionists</h2>
+                </div>
+                <span class="section-count"><%= receptionist.length %> listed</span>
+            </div>
+            <div class="employee-layout">
+                <div class="employee-directory">
+                    <% if (receptionist.length) { %>
+                        <div class="employee-grid">
+                            <% receptionist.forEach(recep => { %>
+                                <article class="info-card">
+                                    <div class="badge">Receptionist</div>
+                                    <h3><%= recep.name %></h3>
+                                    <p><strong>ID:</strong> <%= recep.recep_id %></p>
+                                    <p><strong>Phone:</strong> <%= recep.phone_no %></p>
+                                    <p><strong>Email:</strong> <%= recep.email %></p>
+                                    <p><strong>User ID:</strong> <%= recep.user_id %></p>
+                                </article>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <p class="empty-state">No receptionists have been added yet.</p>
+                    <% } %>
+                </div>
+                <section class="form-panel employee-form">
+                    <p class="eyebrow">Add to directory</p>
+                    <h2>New receptionist</h2>
+                    <form action="/add_reception" method="post">
+                        <label for="recep_id">ID</label>
+                        <input type="text" id="recep_id" name="recep_id" maxlength="40" required>
+                        <label for="reception_phone">Phone</label>
+                        <input type="tel" id="reception_phone" name="phone_no" maxlength="20" required>
+                        <label for="reception_user_id">User ID</label>
+                        <select id="reception_user_id" name="user_id" required>
+                            <option value="">Choose a reception account</option>
+                            <% receptionUsers.forEach(account => { %>
+                                <option value="<%= account.user_id %>"><%= account.name %> (ID: <%= account.user_id %>)</option>
+                            <% }); %>
+                        </select>
+                        <button type="submit">Add Receptionist</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+    <script src="/main.js"></script>
+</body>
+</html>
