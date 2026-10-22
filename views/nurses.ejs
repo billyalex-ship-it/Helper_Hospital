@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurses | The Helper Hospital</title>
-    <link rel="stylesheet" href="/styling.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nurses | The Helper Hospital</title>
+	<link rel="stylesheet" href="/styling.css">
 </head>
 <body>
-    <%- include("_header.ejs") %>
+	<%- include("_header.ejs") %>
 
-    <main class="main-shell">
-        <section class="section-header reveal">
-            <p class="eyebrow">Care team</p>
-            <h1>Our nursing excellence</h1>
-            <p>Our nurses support patient recovery with compassion, clinical precision, and daily attention to comfort and safety.</p>
-        </section>
+	<main class="main-shell">
+		<section class="section-header reveal">
+			<p class="eyebrow">Care team</p>
+			<h1>Meet our nurses</h1>
+			<p>Our nurses support patient recovery with compassion, clinical precision, and daily attention to comfort and safety.</p>
+		</section>
 
-        <section class="content-panel reveal">
-            <p>From bedside care to coordinated treatment support, our nursing team helps create a calm and professional hospital experience.</p>
-        </section>
+		<section class="content-panel reveal">
+			<p class="eyebrow">Compassionate, coordinated care</p>
+			<h2>Here for every stage of your care.</h2>
+			<p>From bedside care to coordinated treatment support, our nursing team helps create a calm and professional hospital experience.</p>
+		</section>
 
-        <section class="section-header reveal">
-            <p class="eyebrow">Our team</p>
-            <h2>Meet our nurses</h2>
-        </section>
-        <section class="card-grid reveal">
-            <% nurses.forEach(nurse => { %>
-                <article class="info-card">
-                    <div class="badge">Nurse</div>
-                    <h3><%= nurse.nurse_name %></h3>
-                    <p><strong>ID:</strong> <%= nurse.nurse_id %></p>
-                    <p><strong>Speciality:</strong> <%= nurse.speciality %></p>
-                    <p><strong>Phone:</strong> <%= nurse.phone_number %></p>
-                    <p><strong>Room:</strong> <%= nurse.room_id %></p>
-                </article>
-            <% }); %>
-        </section>
+		<section class="section-header reveal">
+			<p class="eyebrow">Our team</p>
+			<h2>Dedicated nursing professionals</h2>
+		</section>
+		<section class="card-grid reveal" aria-label="Nursing team">
+			<% if (nurses.length) { %>
+				<% nurses.forEach(nurse => { %>
+					<article class="info-card">
+						<div class="badge">Nurse</div>
+						<h3><%= nurse.nurse_name %></h3>
+						<p><strong>ID:</strong> <%= nurse.nurse_id %></p>
+						<p><strong>Speciality:</strong> <%= nurse.speciality || 'Not specified' %></p>
+						<p><strong>Phone:</strong> <%= nurse.phone_number || 'Not available' %></p>
+						<p><strong>Room:</strong> <%= nurse.room_id || 'Not assigned' %></p>
+					</article>
+				<% }); %>
+			<% } else { %>
+				<p class="empty-state">No nurses have been added to the directory yet.</p>
+			<% } %>
+		</section>
 
-        <section class="section-header reveal">
-            <p class="eyebrow">Nursing specialties</p>
-            <h2>Specialized care for every stage of treatment.</h2>
-            <p>Our nurses bring focused knowledge and compassionate support to each patient's care journey.</p>
-        </section>
+		<section class="section-header reveal">
+			<p class="eyebrow">Nursing specialties</p>
+			<h2>Specialized care for every stage of treatment.</h2>
+			<p>Our nurses bring focused knowledge and compassionate support to each patient's care journey.</p>
+		</section>
 
-        <section class="feature-grid reveal">
-            <article class="feature-card">
-                <div class="icon">01</div>
-                <h3>Surgical nursing</h3>
-                <p>Supports patients before, during, and after surgery through preparation, monitoring, wound care, and recovery guidance.</p>
-            </article>
+		<section class="feature-grid reveal">
+			<article class="feature-card">
+				<div class="icon">01</div>
+				<h3>Surgical nursing</h3>
+				<p>Supports patients before, during, and after surgery through preparation, monitoring, wound care, and recovery guidance.</p>
+			</article>
+			<article class="feature-card">
+				<div class="icon">02</div>
+				<h3>Medical nursing</h3>
+				<p>Provides ongoing care for patients with medical conditions, including treatment support, observation, medication, and education.</p>
+			</article>
+			<article class="feature-card">
+				<div class="icon">03</div>
+				<h3>Diagnostics nursing</h3>
+				<p>Helps patients prepare for diagnostic tests, coordinates clinical information, and supports clear, safe follow-up care.</p>
+			</article>
+		</section>
+	</main>
 
-            <article class="feature-card">
-                <div class="icon">02</div>
-                <h3>Medical nursing</h3>
-                <p>Provides ongoing care for patients with medical conditions, including treatment support, observation, medication, and education.</p>
-            </article>
-
-            <article class="feature-card">
-                <div class="icon">03</div>
-                <h3>Diagnostics nursing</h3>
-                <p>Helps patients prepare for diagnostic tests, coordinates clinical information, and supports clear, safe follow-up care.</p>
-            </article>
-        </section>
-    </main>
-
-    <%- include("_footer.ejs") %>
-    <script src="/main.js"></script>
+	<%- include("_footer.ejs") %>
+	<script src="/main.js"></script>
 </body>
 </html>

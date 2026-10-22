@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Directory</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+    <section class="patient-directory">
+        <% if (user && (user.role === 'admin' || user.role === 'reception')) { %>
+            <section class="patient-list-panel">
+                <h2>Patient Directory</h2>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>ID</th>
+                                <th>Phone</th>
+                                <th>Doctor</th>
+                                <th>Status</th>
+                                <th>Update status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% patients.forEach(patient => { %>
+                                <tr>
+                                    <td><strong><%= patient.patient_name %></strong></td>
+                                    <td><%= patient.patient_id %></td>
+                                    <td><%= patient.phone_no %></td>
+                                    <td><%= patient.doc_name %></td>
+                                    <td>
+                                        <span class="patient-status <%= patient.patient_status === 'discharged' ? 'is-discharged' : 'is-in-house' %>">
+                                            <%= patient.patient_status === 'discharged' ? 'Discharged' : 'In house' %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <form class="patient-status-form" action="/patients/<%= patient.patient_id %>/status" method="post">
+                                            <label class="visually-hidden" for="patient_status_<%= patient.patient_id %>">Status for <%= patient.patient_name %></label>
+                                            <select id="patient_status_<%= patient.patient_id %>" name="patient_status">
+                                                <option value="in_house" <%= patient.patient_status === 'in_house' ? 'selected' : '' %>>In house</option>
+                                                <option value="discharged" <%= patient.patient_status === 'discharged' ? 'selected' : '' %>>Discharged</option>
+                                            </select>
+                                            <button type="submit">Save</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        <% } else { %>
+            <p>You do not have permission to view this page.</p>
+        <% } %>
+    </section>
+    <section class="addpatients patient-add-section">
+    <div class="side-by-side">
+            <section class="form-panel patient-form-panel">
+            <% if (user && (user.role === 'admin' || user.role === 'reception')) { %>
+                <p class="eyebrow">Add a new patient</p>
+                <h2>Patient form</h2>
+                <p class="form-intro">Enter the patient's details and assign the responsible doctor.</p>
+                <form class="patient-form-grid" action="/add-patients" method="post">
+                    <label>
+                        Patient ID
+                        <input type="text" id="patient_id" name="patient_id" maxlength="30" required>
+                    </label>
+                    <label>
+                        Patient Name
+                        <input type="text" id="patient_name" name="patient_name" maxlength="50" required>
+                    </label>
+                    <label>
+                        Phone Number
+                        <input type="tel" id="phone_no" name="phone_no" maxlength="20" required>
+                    </label>
+                    <label>
+                        Gender
+                        <select id="gender" name="gender">
+                            <option value="">Select gender (optional)</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
+                    <label>
+                        Doctor: Id
+                       <input type="text" id="doc_id" name="doc_id" maxlength="30" required>
+                    </label>
+                   
+                    <button type="submit">Add Patient</button>
+                </form>
+            <% } %>
+            </section>
+        </div>
+    </section>
+
+    <%- include("_footer.ejs") %>    
+</body>
+</html>

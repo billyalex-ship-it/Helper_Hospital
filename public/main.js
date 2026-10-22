@@ -32,6 +32,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealItems.forEach((item) => observer.observe(item));
 
+  const slider = document.querySelector('.slider-class');
+  if (slider) {
+    const slides = Array.from(slider.querySelectorAll('.slider-slide'));
+    const dots = Array.from(slider.querySelectorAll('.slider-dot'));
+    const previousButton = slider.querySelector('.slider-previous');
+    const nextButton = slider.querySelector('.slider-next');
+    let activeIndex = 0;
+    let autoAdvance;
+
+    const showSlide = (index) => {
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === index;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', String(!isActive));
+        dots[slideIndex].classList.toggle('is-active', isActive);
+        dots[slideIndex].setAttribute('aria-pressed', String(isActive));
+      });
+      activeIndex = index;
+    };
+
+    const startAutoAdvance = () => {
+      window.clearInterval(autoAdvance);
+      if (slides.length > 1) {
+        autoAdvance = window.setInterval(() => {
+          showSlide((activeIndex + 1) % slides.length);
+        }, 5000);
+      }
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+        startAutoAdvance();
+      });
+    });
+
+    previousButton.addEventListener('click', () => {
+      showSlide((activeIndex - 1 + slides.length) % slides.length);
+      startAutoAdvance();
+    });
+    nextButton.addEventListener('click', () => {
+      showSlide((activeIndex + 1) % slides.length);
+      startAutoAdvance();
+    });
+    startAutoAdvance();
+  }
+
   const counterObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

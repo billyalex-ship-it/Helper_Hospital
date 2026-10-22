@@ -12,32 +12,108 @@
 		<main class="dashboard-main">
 			<header class="dashboard-header">
 				<div>
-					
-					<h1>Hello, <%= user.name %></h1>
-					<p class="dashboard-subtitle">Your clinical schedule and patient care summary for today.</p>
+					<p class="eyebrow">Clinical workspace</p>
+					<h1>Hello <%= user.name %></h1>
+					<p class="dashboard-subtitle">Your patient care overview at The Helper Hospital.</p>
 				</div>
 				<a class="header-action" href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
 			</header>
 
-			<section class="metric-grid" aria-label="Doctor overview">
-				<article class="metric-card metric-card-teal"><span class="metric-label">Today's appointments</span><strong>08</strong><small>3 consultations remaining</small></article>
-				<article class="metric-card metric-card-blue"><span class="metric-label">My patients</span><strong>26</strong><small>4 require follow-up</small></article>
-				<article class="metric-card metric-card-gold"><span class="metric-label">Ward rounds</span><strong>03</strong><small>Next round at 11:30</small></article>
-				<article class="metric-card metric-card-coral"><span class="metric-label">Unread notes</span><strong>05</strong><small>From your care team</small></article>
+			<section class="dashboard-grid" aria-label="Doctor overview">
+				<article class="dashboard-card activity-card">
+					<div class="card-heading">
+						<div>
+							<p class="eyebrow">Patient care</p>
+							<h2>Your patients</h2>
+						</div>
+						<span class="date-chip"><%= patients.length %> assigned</span>
+					</div>
+					<% if (patients.length > 0) { %>
+						<% patients.forEach(patient => { %>
+							<div class="appointment-row">
+								<span class="time">#<%= patient.patient_id %></span>
+								<div>
+									<strong><%= patient.patient_name %></strong>
+									<small><%= patient.phone_no || 'No phone number on file' %></small>
+								</div>
+								<div class="patient-details">
+									<small><%= patient.gender || 'Not specified' %></small>
+									<span class="patient-status <%= patient.patient_status === 'discharged' ? 'is-discharged' : 'is-in-house' %>">
+										<%= patient.patient_status === 'discharged' ? 'Discharged' : 'In house' %>
+									</span>
+								</div>
+							</div>
+						<% }) %>
+					<% } else { %>
+						<p class="dashboard-subtitle">No patients are assigned to you yet.</p>
+					<% } %>
+				</article>
+
+				<article class="dashboard-card">
+					<p class="eyebrow">Your profile</p>
+					<h2>Clinical details</h2>
+					<div class="appointment-row">
+						<div>
+							<strong>Specialty</strong>
+							<small><%= doctor.speciality || 'Not specified' %></small>
+						</div>
+					</div>
+					<div class="appointment-row">
+						<div>
+							<strong>Contact</strong>
+							<small><%= doctor.phone_number || 'No phone number on file' %></small>
+						</div>
+					</div>
+					<a class="header-action" href="/appointments">View appointments <span aria-hidden="true">&rarr;</span></a>
+				</article>
 			</section>
 
-			<section class="dashboard-grid">
+			<section class="dashboard-grid doctor-appointments-grid" aria-label="Booked appointments">
 				<article class="dashboard-card activity-card">
-					<div class="card-heading"><div><p class="eyebrow">Your schedule</p><h2>Today's appointments</h2></div><span class="date-chip">04 Sep</span></div>
-					<div class="appointment-row"><span class="time">09:00</span><div><strong>Follow-up consultation</strong><small>Room 204 &middot; Outpatient clinic</small></div><span class="appointment-status">Next</span></div>
-					<div class="appointment-row"><span class="time">10:30</span><div><strong>New patient assessment</strong><small>Room 204 &middot; Outpatient clinic</small></div><span class="appointment-status muted">Upcoming</span></div>
-					<div class="appointment-row"><span class="time">11:30</span><div><strong>Ward round</strong><small>East wing &middot; Inpatient care</small></div><span class="appointment-status muted">Upcoming</span></div>
-				</article>
-				<article class="dashboard-card quick-card">
-					<p class="eyebrow">Clinical tools</p><h2>Care at a glance</h2>
-					<a href="/patients">Review patient list <span aria-hidden="true">&rarr;</span></a>
-					<a href="/doctors">View medical team <span aria-hidden="true">&rarr;</span></a>
-					<a href="/visitors">Check visitor requests <span aria-hidden="true">&rarr;</span></a>
+					<div class="card-heading">
+						<div>
+							<p class="eyebrow">Appointment requests</p>
+							<h2>Patients who booked appointments</h2>
+						</div>
+						<span class="date-chip"><%= doctorAppointments.length %> total</span>
+					</div>
+					<% if (doctorAppointments.length > 0) { %>
+						<% doctorAppointments.forEach(appointment => { %>
+							<div class="doctor-appointment">
+								<div class="doctor-appointment-summary">
+									<strong><%= appointment.patient_name %></strong>
+									<small><%= appointment.phone_no || 'No phone number on file' %> &middot; #<%= appointment.appointment_id %></small>
+									<small><%= appointment.appointment_date %> at <%= appointment.appointment_time %><% if (appointment.reason) { %> &middot; <%= appointment.reason %><% } %></small>
+								</div>
+								<span class="appointment-status <%= appointment.status === 'pending' ? '' : 'muted' %>"><%= appointment.status %></span>
+								<% if (appointment.status === 'pending' || appointment.status === 'scheduled') { %>
+									<div class="doctor-appointment-actions">
+										<% if (appointment.status === 'pending') { %>
+											<form action="/doctor/appointments/<%= appointment.appointment_id %>/accept" method="post">
+												<button type="submit">Accept</button>
+											</form>
+										<% } %>
+										<form action="/doctor/appointments/<%= appointment.appointment_id %>/cancel" method="post">
+											<button class="appointment-cancel" type="submit">Cancel</button>
+										</form>
+										<form class="appointment-reschedule" action="/doctor/appointments/<%= appointment.appointment_id %>/reschedule" method="post">
+											<label>
+												<span class="visually-hidden">New date</span>
+												<input type="date" name="appointment_date" min="<%= today %>" value="<%= appointment.appointment_date %>" required>
+											</label>
+											<label>
+												<span class="visually-hidden">New time</span>
+												<input type="time" name="appointment_time" value="<%= appointment.appointment_time %>" required>
+											</label>
+											<button type="submit">Reschedule</button>
+										</form>
+									</div>
+								<% } %>
+							</div>
+						<% }) %>
+					<% } else { %>
+						<p class="dashboard-subtitle">No appointments have been booked with you yet.</p>
+					<% } %>
 				</article>
 			</section>
 		</main>

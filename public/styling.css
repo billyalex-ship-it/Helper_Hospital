@@ -1,15 +1,15 @@
 :root {
-  --primary: #2d3e8f;
-  --primary-dark: #1f2a5f;
-  --secondary: #00bfa5;
-  --accent: #ffc107;
-  --soft-blue: #e8f0ff;
-  --bg: #f5f7ff;
+  --primary: #2f65a5;
+  --primary-dark: #17345c;
+  --secondary: #3e7cb8;
+  --accent: #e4b957;
+  --soft-blue: #eaf1fa;
+  --bg: #f5f8fc;
   --white: #ffffff;
-  --text: #1a2747;
-  --muted: #5a6b8f;
-  --border: rgba(45, 62, 143, 0.12);
-  --shadow: 0 18px 45px rgba(45, 62, 143, 0.12);
+  --text: #1e2e45;
+  --muted: #63748a;
+  --border: rgba(23, 52, 92, 0.12);
+  --shadow: 0 18px 45px rgba(23, 52, 92, 0.12);
 }
 
 * {
@@ -18,12 +18,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg, #e8f0ff 0%, #f5f7ff 100%);
+  background: linear-gradient(180deg, var(--soft-blue) 0%, var(--bg) 100%);
   color: var(--text);
   line-height: 1.6;
 }
@@ -39,9 +41,9 @@ img {
 }
 
 .M_header {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  background: var(--primary-dark);
   color: var(--white);
-  box-shadow: 0 14px 28px rgba(45, 62, 143, 0.18);
+  box-shadow: 0 14px 28px rgba(23, 52, 92, 0.18);
 }
 
 .header-inner {
@@ -131,10 +133,9 @@ img {
 }
 
 .hero {
-  background: linear-gradient(135deg, rgba(45, 62, 143, 0.04), rgba(0, 191, 165, 0.08));
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  box-shadow: var(--shadow);
+  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  background: linear-gradient(135deg, var(--soft-blue), rgba(47, 101, 165, 0.1));
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -143,6 +144,8 @@ img {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 2rem;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -183,8 +186,8 @@ img {
 }
 
 .hero-list li {
-  background: rgba(0, 191, 165, 0.06);
-  border: 1px solid rgba(0, 191, 165, 0.12);
+  background: rgba(47, 101, 165, 0.05);
+  border: 1px solid rgba(47, 101, 165, 0.12);
   border-radius: 14px;
   padding: 0.9rem 1rem;
   font-weight: 700;
@@ -192,7 +195,7 @@ img {
 }
 
 .hero-panel {
-  background: linear-gradient(180deg, var(--white), #f0f4ff);
+  background: linear-gradient(180deg, var(--white), var(--soft-blue));
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 1.5rem;
@@ -223,6 +226,161 @@ img {
   font-size: 0.9rem;
 }
 
+.contact-booking-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, var(--white), var(--soft-blue));
+}
+
+.contact-booking-copy {
+  max-width: 720px;
+}
+
+.contact-booking-copy h2 {
+  margin-bottom: 0.75rem;
+}
+
+.contact-booking-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.slider-class {
+  position: relative;
+  height: clamp(240px, 38vw, 420px);
+  margin: 2rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 52, 92, 0.2);
+  border-radius: 24px;
+  background: var(--primary-dark);
+  box-shadow: var(--shadow);
+}
+
+.slider-track,
+.slider-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.slider-slide {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity;
+}
+
+.slider-slide::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(23, 52, 92, 0.88), rgba(47, 101, 165, 0.48) 65%, rgba(23, 52, 92, 0.22));
+  content: "";
+  backdrop-filter: blur(3px);
+}
+
+.slider-slide.is-active {
+  opacity: 1;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(2px);
+  transform: scale(1.04);
+}
+
+.slider-text {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: clamp(1.5rem, 8vw, 6rem);
+  max-width: min(70%, 760px);
+  color: var(--white);
+  transform: translateY(-50%);
+  text-shadow: 0 3px 18px rgba(10, 18, 35, 0.55);
+}
+
+.slider-text h3 {
+  margin: 0 0 0.8rem;
+  color: #fff;
+  font-size: clamp(1.75rem, 3.6vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.slider-text p {
+  margin: 0;
+  color: #f2e8ed;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.slider-control {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  background: rgba(23, 52, 92, 0.72);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transform: translateY(-50%);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.slider-control:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.slider-control:focus-visible,
+.slider-dot:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+
+.slider-previous {
+  left: 1rem;
+}
+
+.slider-next {
+  right: 1rem;
+}
+
+.slider-dots {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 1rem;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.slider-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding: 0;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+}
+
+.slider-dot.is-active {
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;
@@ -245,13 +403,13 @@ button[type="submit"] {
 button[type="submit"] {
   background: linear-gradient(135deg, var(--secondary), var(--primary));
   color: var(--white);
-  box-shadow: 0 12px 24px rgba(45, 62, 143, 0.18);
+  box-shadow: 0 12px 24px rgba(23, 52, 92, 0.18);
 }
 
 .secondary-btn {
-  background: rgba(45, 62, 143, 0.08);
+  background: rgba(23, 52, 92, 0.08);
   color: var(--primary-dark);
-  border: 1px solid rgba(45, 62, 143, 0.12);
+  border: 1px solid rgba(23, 52, 92, 0.12);
 }
 
 .primary-btn:hover,
@@ -327,7 +485,7 @@ button[type="submit"]:hover {
   width: 3rem;
   height: 3rem;
   border-radius: 0.9rem;
-  background: rgba(45, 62, 143, 0.08);
+  background: rgba(23, 52, 92, 0.08);
   color: var(--primary-dark);
   font-weight: 800;
 }
@@ -433,10 +591,10 @@ button[type="submit"]:hover {
 
 .section-count {
   padding: 0.45rem 0.7rem;
-  border: 1px solid rgba(0, 191, 165, 0.2);
+  border: 1px solid rgba(47, 101, 165, 0.2);
   border-radius: 999px;
-  background: rgba(0, 191, 165, 0.08);
-  color: #087d70;
+  background: rgba(47, 101, 165, 0.08);
+  color: var(--primary-dark);
   font-size: 0.78rem;
   font-weight: 800;
   white-space: nowrap;
@@ -483,7 +641,7 @@ button[type="submit"]:hover {
   place-items: center;
   margin: 0;
   padding: 2rem;
-  border: 1px dashed rgba(45, 62, 143, 0.22);
+  border: 1px dashed rgba(23, 52, 92, 0.22);
   color: var(--muted);
   text-align: center;
 }
@@ -511,14 +669,17 @@ button[type="submit"]:hover {
 .meta-list li {
   color: var(--muted);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.8rem;
-  border-bottom: 1px dashed rgba(29, 42, 53, 0.15);
+  border-bottom: 1px dashed rgba(23, 52, 92, 0.15);
   padding-bottom: 0.4rem;
 }
 
 .meta-list strong {
   color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .form-panel {
@@ -548,6 +709,29 @@ button[type="submit"]:hover {
   margin: 2rem auto 0;
 }
 
+.visitor-registration-panel {
+  width: min(100% - 2rem, 460px);
+  margin: 2rem auto;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.visitor-registration-panel h2 {
+  margin: 0;
+  color: var(--text);
+}
+
+.visitor-registration-form {
+  gap: 0.7rem;
+}
+
+.visitor-registration-form .form-row {
+  grid-template-columns: 1fr;
+}
+
+.visitor-registration-form button[type="submit"] {
+  margin-top: 0.35rem;
+}
+
 .side-by-side .form-panel {
   margin: 0;
 }
@@ -557,6 +741,23 @@ button[type="submit"]:hover {
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: clamp(1.25rem, 3vw, 2rem);
   margin-top: 2rem;
+}
+
+.patient-add-section .side-by-side {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
+
+.patient-add-section .patient-form-panel {
+  width: 100%;
+}
+
+.side-by-side > * {
+  min-width: 0;
+}
+
+.card-grid > * {
+  min-width: 0;
 }
 
 .patient-list-panel {
@@ -607,7 +808,56 @@ button[type="submit"]:hover {
 }
 
 .patient-table tbody tr:hover {
-  background: rgba(0, 191, 165, 0.05);
+  background: rgba(47, 101, 165, 0.05);
+}
+
+.patient-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.patient-status.is-in-house {
+  background: #e5f5ee;
+  color: #216b4a;
+}
+
+.patient-status.is-discharged {
+  background: #f1f3f7;
+  color: #63748a;
+}
+
+.patient-status-form {
+  display: flex;
+  min-width: 190px;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.patient-status-form select {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.55rem;
+}
+
+.patient-status-form button[type="submit"] {
+  width: auto;
+  padding: 0.65rem 0.9rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .patient-table td strong {
@@ -649,7 +899,7 @@ select {
   padding: 0.75rem 0.9rem;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: #fafbff;
+  background: #fbfafb;
   color: var(--text);
   font: inherit;
 }
@@ -657,8 +907,8 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 3px solid rgba(0, 191, 165, 0.18);
-  border-color: rgba(0, 191, 165, 0.6);
+  outline: 3px solid rgba(47, 101, 165, 0.18);
+  border-color: rgba(47, 101, 165, 0.6);
 }
 
 button[type="submit"] {
@@ -670,8 +920,66 @@ button[type="submit"] {
   background: var(--primary-dark);
   color: rgba(255, 255, 255, 0.8);
   padding: 1.4rem 1.5rem;
-  text-align: center;
   margin-top: 2rem;
+}
+
+.footer-cont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-links,
+.footer-contact {
+  flex: 1 1 220px;
+}
+
+.footer-text,
+.footer-links,
+.footer-services,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer h1 {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.footer h2 {
+  margin: 0 0 0.75rem;
+  color: var(--white);
+  font-size: 1.1rem;
+}
+
+.footer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer a {
+  color: inherit;
+}
+
+.footer a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  flex: 0 0 100%;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
 }
 
 .footer p {
@@ -716,6 +1024,11 @@ button[type="submit"] {
   .patient-form-grid button[type="submit"] {
     grid-column: auto;
   }
+
+  .contact-booking-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 901px) and (max-width: 1080px) {
@@ -735,6 +1048,60 @@ button[type="submit"] {
 }
 
 @media (max-width: 560px) {
+  .footer-cont {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .footer-copyright {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .slider-class {
+    height: 240px;
+    border-radius: 18px;
+  }
+
+  .slider-text {
+    left: 1.25rem;
+    max-width: calc(100% - 2.5rem);
+    padding: 0 1rem;
+  }
+
+  .slider-text h3 {
+    font-size: clamp(1.5rem, 7vw, 2.1rem);
+  }
+
+  .slider-text p {
+    max-width: 90%;
+    font-size: 0.875rem;
+  }
+
+  .slider-control {
+    top: auto;
+    bottom: 0.7rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    transform: none;
+  }
+
+  .slider-control:hover {
+    transform: scale(1.08);
+  }
+
+  .slider-previous {
+    left: 0.75rem;
+  }
+
+  .slider-next {
+    right: 0.75rem;
+  }
+
+  .slider-dots {
+    bottom: 1.55rem;
+  }
+
   .page-shell,
   .main-shell {
     padding-left: 1rem;

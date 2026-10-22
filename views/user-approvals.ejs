@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User approvals | The Helper Hospital</title>
+	<link rel="stylesheet" href="/nav.css">
+</head>
+<body class="dashboard-body">
+	<div class="dashboard-layout">
+		<%- include('_sidenav', { role: 'admin', active: 'approvals' }) %>
+		<main class="dashboard-main">
+			<header class="dashboard-header">
+				<div>
+					<p class="eyebrow">Administrator review</p>
+					<h1>New user approvals</h1>
+					<p class="dashboard-subtitle">Verify each requested role before approving account access.</p>
+				</div>
+			</header>
+
+			<section class="dashboard-grid doctor-appointments-grid" aria-label="Pending user accounts">
+				<article class="dashboard-card activity-card">
+					<div class="card-heading">
+						<div>
+							<p class="eyebrow">Access control</p>
+							<h2>Pending accounts</h2>
+						</div>
+						<span class="date-chip"><%= pendingUsers.length %> pending</span>
+					</div>
+					<% if (pendingUsers.length > 0) { %>
+						<div class="patient-table-wrap">
+							<table class="patient-table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Requested role</th>
+										<th>Confirm role to approve</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% pendingUsers.forEach(pendingUser => { %>
+										<tr>
+											<td><strong><%= pendingUser.name %></strong></td>
+											<td><%= pendingUser.email %></td>
+											<td><span class="approval-role"><%= pendingUser.role %></span></td>
+											<td>
+												<form class="approval-form" action="/admin/user-approvals/<%= pendingUser.user_id %>/approve" method="post">
+													<label class="visually-hidden" for="confirmed_role_<%= pendingUser.user_id %>">Confirm requested role for <%= pendingUser.name %></label>
+													<select id="confirmed_role_<%= pendingUser.user_id %>" name="confirmed_role" required>
+														<option value="">Select verified role</option>
+														<option value="doctor">Doctor</option>
+														<option value="nurse">Nurse</option>
+														<option value="patient">Patient</option>
+														<option value="visitor">Visitor</option>
+														<option value="reception">Reception</option>
+														<option value="admin">Administrator</option>
+													</select>
+													<button type="submit">Approve</button>
+												</form>
+											</td>
+										</tr>
+									<% }); %>
+								</tbody>
+							</table>
+						</div>
+					<% } else { %>
+						<p class="dashboard-subtitle">There are no accounts awaiting approval.</p>
+					<% } %>
+				</article>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

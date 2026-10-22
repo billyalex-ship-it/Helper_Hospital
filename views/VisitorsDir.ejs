@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Directory</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+<% if (user && (user.role === 'admin' || user.role === 'reception')) { %>
+    <section class="visitor-directory">
+            <h2>Registered visitors</h2>
+            <% if (visitors.length) { %>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Visitor</th>
+                                <th>Phone</th>
+                                <th>Patient</th>
+                                <th>Patient ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% visitors.forEach(visitor => { %>
+                                <tr>
+                                    <td><strong><%= visitor.visitor_name %></strong></td>
+                                    <td><%= visitor.phone_no %></td>
+                                    <td><%= visitor.patient_name %></td>
+                                    <td><%= visitor.patient_id %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <p>No visitors are registered yet.</p>
+            <% } %>
+        </section>
+<% } else { %>
+    <p>You do not have permission to view this page.</p>
+<% } %>
+<% if (user && (user.role === 'admin' || user.role === 'reception')) { %>
+    <section class="form-panel visitor-registration-panel">
+        <p class="eyebrow">Visitor services</p>
+        <h2>Register a visitor</h2>
+        <p>Please enter the visitor's details and select the patient they are visiting.</p>
+        <form class="visitor-registration-form" action="/add-visitors" method="post">
+            <div class="form-row">
+                <label for="visitor_name">Full name</label>
+                <input type="text" id="visitor_name" name="visitor_name" maxlength="50" required>
+            </div>
+            <div class="form-row">
+                <label for="phone_no">Phone number</label>
+                <input type="tel" id="phone_no" name="phone_no" maxlength="20" required>
+            </div>
+            <div class="form-row">
+                <label for="patient_id">Patient ID</label>
+                <input type="text" id="patient_id" name="patient_id" maxlength="30" required>
+            </div>
+            <input type="hidden" name="returnTo" value="directory">
+            <button type="submit">Register visitor</button>
+        </form>
+    </section>
+<% } %>
+        <%- include("_footer.ejs") %>
+    
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments | The Helper Hospital</title>
+    <link rel="stylesheet" href="/styling.css">
+</head>
+<body>
+    <%- include("_header.ejs") %>
+
+    <main class="main-shell">
+        <section class="section-header">
+            <p class="eyebrow">Appointment services</p>
+            <h1>Book an appointment</h1>
+            <p>Choose a registered patient, doctor, and a convenient date and time.</p>
+        </section>
+
+        <section class="form-panel">
+            <h2>Appointment details</h2>
+            <form action="/add-appointments" method="post">
+                <div class="form-row">
+                    <label for="patient_id">
+                        Patient
+                        <select id="patient_id" name="patient_id" required>
+                            <option value="">Choose a patient</option>
+                            <% patients.forEach(patient => { %>
+                                <option value="<%= patient.patient_id %>"><%= patient.patient_name %> (ID: <%= patient.patient_id %>)</option>
+                            <% }); %>
+                        </select>
+                    </label>
+
+                    <label for="doctor_id">
+                        Doctor
+                        <select id="doctor_id" name="doctor_id" required>
+                            <option value="">Choose a doctor</option>
+                            <% doctors.forEach(doctor => { %>
+                                <option value="<%= doctor.doctor_id %>"><%= doctor.doc_name %> - <%= doctor.speciality || 'General practice' %></option>
+                            <% }); %>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <label for="appointment_date">
+                        Date
+                        <input type="date" id="appointment_date" name="appointment_date" min="<%= today %>" required>
+                    </label>
+
+                    <label for="appointment_time">
+                        Time
+                        <input type="time" id="appointment_time" name="appointment_time" required>
+                    </label>
+                </div>
+
+                <label for="reason">Reason for appointment (optional)</label>
+                <textarea id="reason" name="reason" maxlength="255" rows="3"></textarea>
+
+                <button type="submit" <%= patients.length === 0 || doctors.length === 0 ? 'disabled' : '' %>>Book appointment</button>
+                <% if (patients.length === 0 || doctors.length === 0) { %>
+                    <p class="form-intro">Appointments require at least one registered patient and doctor.</p>
+                <% } %>
+            </form>
+        </section>
+
+        <section class="patient-list-panel">
+            <h2>Booked appointments</h2>
+            <% if (appointments.length > 0) { %>
+                <div class="patient-table-wrap">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% appointments.forEach(appointment => { %>
+                                <tr>
+                                    <td><strong><%= appointment.patient_name %></strong><br><%= appointment.patient_id %></td>
+                                    <td><%= appointment.doc_name %></td>
+                                    <td><%= appointment.appointment_date %></td>
+                                    <td><%= appointment.appointment_time %></td>
+                                    <td><%= appointment.status %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <p>No appointments have been booked yet.</p>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include("_footer.ejs") %>
+</body>
+</html>

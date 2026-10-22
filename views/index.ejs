@@ -9,7 +9,52 @@
 <body>
     <%- include("_header.ejs") %>
 
-    <main class="page-shell">
+
+        <section class="slider-class" aria-label="Hospital facilities">
+            <div class="slider-track">
+                <div class="slider-slide is-active" aria-hidden="false">
+                    <img class="slider-image" src="/ICU.jpg" alt="Hospital intensive care unit">
+                    <div class="slider-text">
+                        <h3>Intensive Care Unit</h3>
+                        <p>Our ICU provides continuous monitoring, advanced life-support technology, and compassionate specialist care to support critically ill patients with comfort, dignity, and hope..</p>
+                    </div>
+                </div>
+                <div class="slider-slide" aria-hidden="true">
+                    <img class="slider-image" src="/mri.jpg" alt="Hospital MRI imaging equipment">
+                    <div class="slider-text">
+                        <h3>MRI Imaging</h3>
+                        <p>Our advanced MRI and imaging services deliver clear, accurate diagnostic insights, helping our specialists identify conditions early and guide your treatment with confidence..</p>
+                    </div>
+                </div>
+                <div class="slider-slide" aria-hidden="true">
+                    <img class="slider-image" src="/theatre.jpg" alt="Hospital operating theatre">
+                    <div class="slider-text">
+                        <h3>Operating Theatre</h3>
+                        <p>Our modern operating theatres combine skilled surgical teams, advanced equipment, and exceptional care to ensure safe procedures and the best possible patient experience..</p>
+                    </div>
+                </div>
+                <div class="slider-slide" aria-hidden="true">
+                    <img class="slider-image" src="/Maternity.jpg" alt="Hospital maternity care">
+                    <div class="slider-text">
+                        <h3>Maternity care</h3>
+                        <p>Our maternity services provide compassionate prenatal, delivery, and postnatal care, ensuring mothers and newborns receive expert support throughout their journey..</p>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-control slider-previous" type="button" aria-label="Show previous image">
+                <span aria-hidden="true">&#10094;</span>
+            </button>
+            <button class="slider-control slider-next" type="button" aria-label="Show next image">
+                <span aria-hidden="true">&#10095;</span>
+            </button>
+            <div class="slider-dots" role="group" aria-label="Choose a facility image">
+                <button class="slider-dot is-active" type="button" aria-label="Show intensive care unit" aria-pressed="true"></button>
+                <button class="slider-dot" type="button" aria-label="Show MRI imaging equipment" aria-pressed="false"></button>
+                <button class="slider-dot" type="button" aria-label="Show operating theatre" aria-pressed="false"></button>
+                <button class="slider-dot" type="button" aria-label="Show maternity care" aria-pressed="false"></button>
+            </div>
+        </section>
+            <main class="page-shell">
         <section class="hero reveal">
             <div class="hero-grid">
                 <div class="hero-copy">
@@ -18,7 +63,7 @@
                     <p>At The Helper Hospital, we combine clinical excellence with compassionate service to deliver responsive treatment, strong recovery outcomes, and a safer experience for every patient and family we serve.</p>
 
                     <div class="cta-row">
-                        <a class="primary-btn" href="/patients">Book a Consultation</a>
+                        <a class="primary-btn" href="/Appointments">Book a Consultation</a>
                         <a class="secondary-btn" href="/doctors">Meet Our Specialists</a>
                     </div>
 
@@ -60,7 +105,6 @@
                 </aside>
             </div>
         </section>
-
         <section class="stats-grid reveal">
             <div class="stat-card">
                 <strong data-target="35" data-suffix="+">0</strong>

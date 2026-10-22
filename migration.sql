@@ -22,6 +22,9 @@ CREATE TABLE IF NOT EXISTS users (
     UNIQUE KEY uq_users_email (email)
 ) ENGINE=InnoDB;
 
+ALTER TABLE users
+    ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT TRUE;
+
 CREATE TABLE IF NOT EXISTS rooms (
     room_id VARCHAR(20) NOT NULL,
     room_name VARCHAR(20) DEFAULT NULL,
@@ -83,6 +86,9 @@ CREATE TABLE IF NOT EXISTS patients (
         FOREIGN KEY (user_id) REFERENCES users (user_id)
 ) ENGINE=InnoDB;
 
+ALTER TABLE patients
+    ADD COLUMN patient_status ENUM('in_house', 'discharged') NOT NULL DEFAULT 'in_house';
+
 CREATE TABLE IF NOT EXISTS receptionist (
     recep_id VARCHAR(40) NOT NULL,
     phone_no VARCHAR(20) DEFAULT NULL,
@@ -134,6 +140,10 @@ CREATE TABLE IF NOT EXISTS appointments (
     CONSTRAINT fk_appointments_room
         FOREIGN KEY (room_id) REFERENCES rooms (room_id)
 ) ENGINE=InnoDB;
+
+ALTER TABLE appointments
+    MODIFY status ENUM('pending', 'scheduled', 'completed', 'cancelled', 'no_show')
+    DEFAULT 'pending';
 
 CREATE TABLE IF NOT EXISTS bills (
     bill_id INT NOT NULL AUTO_INCREMENT,

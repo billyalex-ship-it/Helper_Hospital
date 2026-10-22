@@ -16,7 +16,7 @@
 					<h1>Hello <%= user ? user.name : 'Administrator' %></h1>
 					<p class="dashboard-subtitle">Here is what is happening across The Helper Hospital today.</p>
 				</div>
-				<a class="header-action" href="/patients">View patient records <span aria-hidden="true">&rarr;</span></a>
+				<a class="header-action" href="/PatientsDir">View patient records <span aria-hidden="true">&rarr;</span></a>
 			</header>
 
 			<section class="metric-grid" aria-label="Hospital overview">
@@ -45,9 +45,10 @@
 			<section class="dashboard-grid">
 				<article class="dashboard-card quick-card">
 					<p class="eyebrow">Quick actions</p><h2>Keep the day moving</h2>
-					<a href="/patients">Open patient records <span aria-hidden="true">&rarr;</span></a>
+					<a href="/PatientsDir">Open patient records <span aria-hidden="true">&rarr;</span></a>
+					<a href="/admin/user-approvals">Review new users <span aria-hidden="true">&rarr;</span></a>
 					<a href="/doctors">Review medical team <span aria-hidden="true">&rarr;</span></a>
-					<a href="/visitors">Manage visitors <span aria-hidden="true">&rarr;</span></a>
+					<a href="/VisitorsDir">Manage visitors <span aria-hidden="true">&rarr;</span></a>
 					<a href="/employees">Manage employees <span aria-hidden="true">&rarr;</span></a>
 				</article>
 			</section>

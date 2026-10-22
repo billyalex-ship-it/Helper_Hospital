@@ -58,48 +58,15 @@
                         <input type="tel" id="phone_no" name="phone_no" maxlength="20" required>
                     </label>
                     <label>
-                        Patient
-                        <select id="patient_id" name="patient_id" required>
-                            <option value="">Choose a patient</option>
-                            <% patients.forEach(patient => { %>
-                                <option value="<%= patient.patient_id %>"><%= patient.patient_name %> (ID: <%= patient.patient_id %>)</option>
-                            <% }); %>
-                        </select>
+                        Patient ID
+                        <input type="text" id="patient_id" name="patient_id" maxlength="30" required>
                     </label>
                 </div>
                 <button type="submit">Submit Visit</button>
             </form>
         </section>
 
-        <section class="content-panel reveal">
-            <h2>Registered visitors</h2>
-            <% if (visitors.length) { %>
-                <div class="patient-table-wrap">
-                    <table class="patient-table">
-                        <thead>
-                            <tr>
-                                <th>Visitor</th>
-                                <th>Phone</th>
-                                <th>Patient</th>
-                                <th>Patient ID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% visitors.forEach(visitor => { %>
-                                <tr>
-                                    <td><strong><%= visitor.visitor_name %></strong></td>
-                                    <td><%= visitor.phone_no %></td>
-                                    <td><%= visitor.patient_name %></td>
-                                    <td><%= visitor.patient_id %></td>
-                                </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
-                </div>
-            <% } else { %>
-                <p>No visitors are registered yet.</p>
-            <% } %>
-        </section>
+        
     </main>
 
     <%- include("_footer.ejs") %>
